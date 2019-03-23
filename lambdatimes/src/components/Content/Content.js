@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 import Tabs from './Tabs';
 import Cards from './Cards';
+import Carousel from '../Carousel/Carousel';
 
 // Importing our tab and card data. No need to change anything here.
-import { tabData, cardData } from '../../data';
+import { tabData, cardData, carouselData } from '../../data';
 
 export default class Content extends Component {
   constructor(props) {
@@ -12,13 +13,14 @@ export default class Content extends Component {
     this.state = {
       selected: 'all',
       tabs: [],
-      cards: []
+      cards: [],
+      carousel: []
     };
   }
 
   componentDidMount() {
     // Once the component has mounted, get the data and reflect that data on the state.
-    this.setState({tabs: tabData, cards: cardData})
+    this.setState({tabs: tabData, cards: cardData, carousel: carouselData})
   }
 
   changeSelected = tab => {
@@ -57,6 +59,7 @@ export default class Content extends Component {
           and `selectTabHandler` that includes the function to change the selected tab
         */}
         <Tabs tabs={this.state.tabs} selectedTab={this.state.selected} selectTabHandler={this.changeSelected}/>
+        <Carousel images={this.state.carousel}/>
         <Cards cards={this.filterCards()} />
       </div>
     );
